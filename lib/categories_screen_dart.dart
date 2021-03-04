@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import './category_item.dart';
@@ -11,8 +12,10 @@ class CategoriesScreen extends StatelessWidget {
         title: const Text("Meals App"),
       ),
       body: GridView(
+        padding: EdgeInsets.all(25),
         children: DUMMY_CATEGORIES
             .map((catData) => CategoryItem(
+                  id: catData.id,
                   title: catData.title,
                   color: catData.color,
                 ))
