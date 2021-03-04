@@ -2,8 +2,13 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import './categories_screen_dart.dart';
-import './category_meals_screen.dart';
+import './screen/meal_detail_screen.dart';
+import './screen/categories_screen_dart.dart';
+import './screen/category_meals_screen.dart';
+
+void main(){
+  runApp(MealsApp());
+}
 
 class MealsApp extends StatelessWidget {
   @override
@@ -40,7 +45,8 @@ class MealsApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => CategoriesScreen(),
-        '/category-meals': (context) => CategoryMealsScreen()
+        '/category-meals': (context) => CategoryMealsScreen(),
+        '/details-meals': (context) => MealDetailScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
