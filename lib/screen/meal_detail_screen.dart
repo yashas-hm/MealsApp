@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import '../dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
+
+  final Function toggleFav;
+  final Function checkFav;
+
+  MealDetailScreen(this.toggleFav, this.checkFav);
+
   Widget buildTitle(BuildContext context, String title) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -82,11 +88,16 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          Navigator.of(context).pop(mealId);
+      floatingActionButton: checkFav(mealData)?FloatingActionButton(
+        child: Icon(Icons.favorite),
+        onPressed: () => {
+          toggleFav(mealId)
         },
+      ):FloatingActionButton(
+        child: Icon(Icons.favorite_border),
+        onPressed: () => {
+        toggleFav(mealId)
+      },
       ),
     );
   }
