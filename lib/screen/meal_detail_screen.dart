@@ -36,51 +36,58 @@ class MealDetailScreen extends StatelessWidget {
     final mealData = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text('${mealData.title}'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 300,
-                width: double.infinity,
-                child: Image.network(
-                  mealData.imageUrl,
-                  fit: BoxFit.cover,
+      appBar: AppBar(
+        title: Text('${mealData.title}'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 300,
+              width: double.infinity,
+              child: Image.network(
+                mealData.imageUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
+            buildTitle(context, "Ingredients"),
+            buildListContainer(ListView.builder(
+              itemBuilder: (context, index) => Card(
+                color: Colors.greenAccent,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 10,
+                  ),
+                  child: Text(mealData.ingredients[index]),
                 ),
               ),
-              buildTitle(context, "Ingredients"),
-              buildListContainer(ListView.builder(
-                itemBuilder: (context, index) => Card(
-                  color: Colors.greenAccent,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: 10,
+              itemCount: mealData.ingredients.length,
+            )),
+            buildTitle(context, "Steps"),
+            buildListContainer(ListView.builder(
+              itemBuilder: (context, index) => Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text('#${(index + 1)}'),
                     ),
-                    child: Text(mealData.ingredients[index]),
+                    title: Text(mealData.steps[index]),
                   ),
-                ),
-                itemCount: mealData.ingredients.length,
-              )),
-              buildTitle(context, "Steps"),
-              buildListContainer(ListView.builder(
-                itemBuilder: (context, index) => Column(
-                  children: <Widget>[
-                    ListTile(
-                      leading: CircleAvatar(
-                        child: Text('#${(index + 1)}'),
-                      ),
-                      title: Text(mealData.steps[index]),
-                    ),
-                    Divider(),
-                  ],
-                ),
-                itemCount: mealData.steps.length,
-              ))
-            ],
-          ),
-        ));
+                  Divider(),
+                ],
+              ),
+              itemCount: mealData.steps.length,
+            ))
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop(mealId);
+        },
+      ),
+    );
   }
 }
