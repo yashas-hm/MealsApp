@@ -12,22 +12,18 @@ class FavouritesScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Favourites'),),
-      body: categoryMeals.isEmpty?Center(child: Text('No Favourites yet!'),):
-      ListView.builder(
-        itemBuilder: (context, index) {
-          return MealItem(
-            id: categoryMeals[index].id,
-            title: categoryMeals[index].title,
-            imageUrl: categoryMeals[index].imageUrl,
-            duration: categoryMeals[index].duration,
-            affordability: categoryMeals[index].affordability,
-            complexity: categoryMeals[index].complexity,
-          );
-        },
-        itemCount: categoryMeals.length,
-      ),
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return MealItem(
+          id: categoryMeals[index].id,
+          title: categoryMeals[index].title,
+          imageUrl: categoryMeals[index].imageUrl,
+          duration: categoryMeals[index].duration,
+          affordability: categoryMeals[index].affordability,
+          complexity: categoryMeals[index].complexity,
+        );
+      },
+      itemCount: categoryMeals.length,
     );
   }
 
